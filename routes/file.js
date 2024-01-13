@@ -73,7 +73,6 @@ const s3Client = new S3Client({
   },
 });
 
-
 fileRouter.post("/upload", upload.single("image"), async (req, res) => {
   try {
     if (!req.file) {
@@ -89,7 +88,6 @@ fileRouter.post("/upload", upload.single("image"), async (req, res) => {
 
     const fileBuffer = await sharp(req.file.buffer)
       .resize({
-       
         height: hieghtsize ? hieghtsize : 500,
         width: size ? size : 500,
         fit: "cover",
@@ -168,25 +166,32 @@ fileRouter.get("/files", async (req, res) => {
 });
 
 // Route to delete a file
-fileRouter.delete("/delete/:filename", async (req, res) => {
-  const { filename } = req.params;
+fileRouter.post("/delete", async (req, res) => {
+  const { link } = req.body;
 
   try {
     // Find the file in the database
-    const sqlSelect = "SELECT * FROM files WHERE filename = ?";
-    const rows = db.query(sqlSelect, [filename]);
 
-    if (rows.length === 0) {
-      return res.status(404).json({ message: "File not found." });
+    if (!link) {
+      return res.status(400).json({ message: "No image to delete" });
     }
 
-    // Delete the file from the database
-    const sqlDelete = "DELETE FROM files WHERE filename = ?";
-    await db.query(sqlDelete, [filename]);
+    if (link) {
+      const deleteParams = {
+        Bucket: "dash93",
+        Key: link,
+      };
+      await s3Client.send(new DeleteObjectCommand(deleteParams));
 
-    // You may also want to delete the file from S3 here if needed
+      res.json({ message: "Image Deleted Successfully" });
+    }
 
-    res.status(200).json({ message: "File deleted successfully." });
+
+
+
+    
+
+    // res.status(200).json({ message: "File deleted successfully." });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error." });
