@@ -58,8 +58,10 @@ const fileRouter = express.Router();
 // prepare S3 client
 const bucketName = "dash93";
 const region = "us-east-1";
-const accessKeyId = "DO00M9XA6DJ9P9Y4UWFT";
-const secretAccessKey = "fcWJxA4nn0r5yNKUi1011UzQ66FPMO6Lt8UEuGWSypE";
+const accessKeyId = "DO00PHUUAT4VXQF27H6N"
+// "DO00M9XA6DJ9P9Y4UWFT";
+const secretAccessKey = "P1YyD/tvykl7hpLKBF/g3Ff1KN2yJOunrRlWSXGRa5s"
+// "fcWJxA4nn0r5yNKUi1011UzQ66FPMO6Lt8UEuGWSypE";
 
 const endpoint = "https://nyc3.digitaloceanspaces.com";
 const cdnEndpoint = "https://dash93.nyc3.cdn.digitaloceanspaces.com";
