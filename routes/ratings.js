@@ -139,8 +139,8 @@ ratingRouter.get("/ratings",  async (req, res) => {
 
 
   // send Data from reviews to books.json
-   //const jsonData = JSON.stringify(testReviews)
-//await fs.writeFileSync('books.json', jsonData)
+//    const jsonData = JSON.stringify(testReviews)
+// await fs.writeFileSync('books.json', jsonData)
   
 const data = fs.readFileSync(path.resolve(__dirname, '../books.json'), "utf-8");
 
@@ -148,7 +148,7 @@ const data = fs.readFileSync(path.resolve(__dirname, '../books.json'), "utf-8");
 
 
     console.log("Data" );
-    res.status(200).json({ data:data  });
+    res.status(200).json({ data:JSON.parse(data)  });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Catch Error: Internal Server Error.",erroMessage:error?.message });
