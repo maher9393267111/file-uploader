@@ -1,6 +1,10 @@
 const express = require("express");
+const fs = require("fs")
+const path = require("path");
 
 const ratingRouter = express.Router();
+// REPO
+//https://github.com/davidjumiller/review-scraper/blob/ab9183fad04006a2ee227ec647b8620681d1243c/package.json
 
 const puppeteer = require('puppeteer')
 
@@ -133,10 +137,18 @@ ratingRouter.get("/ratings",  async (req, res) => {
   )
   console.log(testReviews)
 
+
+  // send Data from reviews to books.json
+   //const jsonData = JSON.stringify(testReviews)
+//await fs.writeFileSync('books.json', jsonData)
   
+const data = fs.readFileSync(path.resolve(__dirname, '../books.json'), "utf-8");
+
+
+
 
     console.log("Data" );
-    res.status(200).json({ data:testReviews , count:testCount  });
+    res.status(200).json({ data:data  });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Catch Error: Internal Server Error.",erroMessage:error?.message });
