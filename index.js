@@ -1,5 +1,6 @@
 const express = require("express");
 const { fileRouter } = require("./routes/file");
+const { ratingRouter } = require("./routes/ratings");
 
 const cors = require("cors");
 require("dotenv").config();
@@ -43,7 +44,7 @@ app.get("/", (req, res) => {
 // });
 
 app.use("/file", fileRouter);
-
+app.use("/google", ratingRouter);
 
 const port = process.env.PORT || '8000';
 
