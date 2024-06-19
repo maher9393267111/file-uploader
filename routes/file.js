@@ -84,6 +84,7 @@ fileRouter.post("/upload", upload.single("image"), async (req, res) => {
       return res.status(400).json({ message: "No files were uploaded." });
     }
 
+    
     const fileName = crypto.randomBytes(32).toString("hex");
 
     const size = parseInt(req.query.size);
@@ -190,17 +191,7 @@ fileRouter.post('/uploads', upload.array('images', 10), async (req, res) => {
 
     console.log("FILES" , req.files)
     const uploadedFiles = [];
-    // const filesToDelete = req.body.filesToDelete || [];
 
-    // // Deletes the files marked for deletion
-    // for (const fileToDelete of filesToDelete) {
-    //   await s3Client.send(
-    //     new DeleteObjectCommand({
-    //       Bucket: bucketName,
-    //       Key: fileToDelete,
-    //     })
-    //   );
-    // }
 
 
 
@@ -213,8 +204,8 @@ fileRouter.post('/uploads', upload.array('images', 10), async (req, res) => {
 
       const fileBuffer = await sharp(file.buffer)
         .resize({
-          height: hieghtsize ? hieghtsize : 500,
-          width: size ? size : 500,
+          height: hieghtsize ? hieghtsize : 800,
+          width: size ? size : 1000,
           fit: 'cover',
         })
         .toBuffer();
