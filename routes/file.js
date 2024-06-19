@@ -93,8 +93,8 @@ fileRouter.post("/upload", upload.single("image"), async (req, res) => {
 
     const fileBuffer = await sharp(req.file.buffer)
       .resize({
-        height: hieghtsize ? hieghtsize : 500,
-        width: size ? size : 500,
+        height: hieghtsize ? hieghtsize : 700,
+        width: size ? size : 1000,
         fit: "cover",
       })
       .toBuffer();
