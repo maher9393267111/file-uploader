@@ -206,7 +206,7 @@ fileRouter.post('/uploads', upload.array('images', 10), async (req, res) => {
         .resize({
           height: hieghtsize ? hieghtsize : 800,
           width: size ? size : 1000,
-          fit: 'cover',
+          fit: 'fill',
         })
         .toBuffer();
 
