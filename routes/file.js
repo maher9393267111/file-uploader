@@ -19,27 +19,7 @@ const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 
 const validFileTypes = [
   "*",
-  // "image/jpeg",
-  // "image/jpg",
-  // "image/png",
-  // "text/csv",
-  // "text/plain",
-  // "application/pdf",
-  // "application/mspowerpoint",
-  // "application/msword",
-  // "application/excel",
-  // "audio/mpeg",
-  // "audio/mp4",
-  // "audio/mp3",
-  // "audio/ogg",
-  // "audio/vnd.wav",
-  // "audio/wave",
-  // "video/mp4",
-  // "video/3gpp",
-  // "video/quicktime",
-  // "video/x-ms-wmv",
-  // "video/x-msvideo",
-  // "video/x-flv",
+
 ];
 
 const storage = multer.memoryStorage();
