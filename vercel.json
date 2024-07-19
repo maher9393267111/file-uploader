@@ -1,28 +1,31 @@
-
 {
+  "version": 2,
+  "name": "food-delivery",
+  "public":true,
   "builds": [
-      {
-          "src": "./index.js",
-          "use": "@vercel/node"
-      },
-      {
-        "src": "./public/**",
-        "use": "@vercel/static"
+     { 
+       "src": "index.js", 
+       "use": "@vercel/node" 
+    },
+     {
+       "src" : "public/**",
+       "use" : "@vercel/static"
     }
   ],
   "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "index.js"
-      },
-
-    {
-        "src": "/",
-        "dest": "public/test.html"
+     { 
+       "src": "/(.*)", 
+       "dest": "/index.js" ,
+       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    "headers": {
+      "Access-Control-Allow-Origin": "*"}
     },
-    {
-        "src": "/(.+)",
-        "dest": "public/$1"
-    }
+     {
+       "src": "/(.+\\.[a-z]+)$",
+       "dest": "/public/$1"
+     }
   ]
+  
+  
+  
 }
