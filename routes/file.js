@@ -22,7 +22,23 @@ const validFileTypes = [
 
 ];
 
-const storage = multer.memoryStorage();
+//const storage = multer.memoryStorage();
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+
+
+
+
+
 
 const upload = multer({
   storage,
@@ -143,6 +159,7 @@ fileRouter.post("/uploads", upload.array("images", 10), async (req, res) => {
     console.log("FILES", req.files);
     const uploadedFiles = [];
 
+
     // Process and upload the new files
     for (const file of req.files) {
       const fileName = `${crypto.randomBytes(32).toString("hex")}${path.extname(
@@ -150,9 +167,9 @@ fileRouter.post("/uploads", upload.array("images", 10), async (req, res) => {
       )}`;
       const size = parseInt(req.query.size);
       const hieghtsize = parseInt(req.query.hieghtsize);
-
-      const fileBuffer = await sharp(file.buffer)
-        .resize({
+//req.file.path)
+      const fileBuffer = await sharp(file.path)
+      .resize({
           height: hieghtsize ? hieghtsize : 800,
           width: size ? size : 1000,
           fit: "fill",
