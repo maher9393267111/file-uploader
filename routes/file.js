@@ -159,7 +159,6 @@ fileRouter.post("/uploads", upload.array("images", 10), async (req, res) => {
     console.log("FILES", req.files);
     const uploadedFiles = [];
 
-
     // Process and upload the new files
     for (const file of req.files) {
       const fileName = `${crypto.randomBytes(32).toString("hex")}${path.extname(
@@ -167,8 +166,8 @@ fileRouter.post("/uploads", upload.array("images", 10), async (req, res) => {
       )}`;
       const size = parseInt(req.query.size);
       const hieghtsize = parseInt(req.query.hieghtsize);
-//req.file.path)
-      const fileBuffer = await sharp(file.path)
+
+      const fileBuffer = await sharp(file.buffer)
       .resize({
           height: hieghtsize ? hieghtsize : 800,
           width: size ? size : 1000,
