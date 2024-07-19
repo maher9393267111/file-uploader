@@ -8,7 +8,7 @@ require("dotenv").config();
 
 const app = express();
 app.use(express.json());
-app.use(exp.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.get("/", (req, res) => {
