@@ -1,13 +1,14 @@
 const express = require("express");
 const { fileRouter } = require("./routes/file");
 const { ratingRouter } = require("./routes/ratings");
+const path =require("path")
 
 const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
 app.use(express.json());
-app.use(express.static('public'));
+app.use(exp.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.get("/", (req, res) => {
