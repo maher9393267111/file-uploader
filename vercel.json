@@ -4,7 +4,7 @@
   "public":true,
   "builds": [
      { 
-       "src": "index.js", 
+       "src": "./index.js", 
        "use": "@vercel/node" 
     },
      {
@@ -13,13 +13,13 @@
     }
   ],
   "routes": [
-     { 
-       "src": "/(.*)", 
-       "dest": "/index.js" ,
-       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    "headers": {
-      "Access-Control-Allow-Origin": "*"}
-    },
+    {
+               "src": "/(.*)",
+             "dest": "index.js"
+             }
+    
+    ,
+
      {
        "src": "/(.+\\.[a-z]+)$",
        "dest": "/public/$1"
