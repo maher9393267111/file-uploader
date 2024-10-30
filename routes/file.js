@@ -91,7 +91,7 @@ fileRouter.post("/upload", upload.single("image"), async (req, res) => {
       new PutObjectCommand({
         Bucket: bucketName,
         Key: fileName,
-        Body: fileBuffer,
+        Body:file.buffer  ,  //fileBuffer,
         ContentType: file.mimetype,
         ACL: "public-read",
       })
@@ -163,7 +163,7 @@ fileRouter.post("/uploads", upload.array("images", 10), async (req, res) => {
         new PutObjectCommand({
           Bucket: bucketName,
           Key: fileName,
-          Body: fileBuffer,
+          Body: file.buffer, //fileBuffer,
           ContentType: file.mimetype,
           ACL: "public-read",
         })
